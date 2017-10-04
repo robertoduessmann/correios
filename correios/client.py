@@ -414,6 +414,11 @@ class Correios:
 
         return posting_list
 
+    def get_posting_list(self, posting_list_number) -> PostingList:
+        posting_list_str = self._auth_call("solicitaXmlPlp", posting_list_number)
+        posting_list_xml = xml_utils.fromstring(posting_list_str.encode("ISO-8859-1"))
+        return posting_list_xml
+
     def get_tracking_code_events(self, tracking_list):
         if isinstance(tracking_list, (str, TrackingCode)):
             tracking_list = [tracking_list]

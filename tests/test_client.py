@@ -327,3 +327,10 @@ def test_calculate_delivery_time_service_not_allowed_for_path(client):
     expected_delivery_time = 0
     delivery_time = client.calculate_delivery_time(Service.get(SERVICE_PAC), '01311300', '01311300')
     assert expected_delivery_time == int(delivery_time)
+
+
+@pytest.mark.skipif(not correios, reason="API Client support disabled")
+@vcr.use_cassette
+def test_get_posting_list(client, posting_list_number):
+    posting_list = client.get_posting_list(posting_list_number)
+    assert "<tipo_arquivo>Postagem</tipo_arquivo><versao_arquivo>2.3</versao_arquivo><plp><id_plp>95061558</id_plp>" in posting_list

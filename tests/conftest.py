@@ -201,3 +201,8 @@ register(PostingListFactory, "posting_list")
 @pytest.fixture
 def client():
     return correios.Correios(username="sigep", password="XXXXXX", environment=correios.Correios.TEST)
+
+
+@pytest.fixture
+def posting_list_number():
+    return 95061558
